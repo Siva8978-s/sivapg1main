@@ -1,0 +1,84 @@
+[
+    {
+      "id": 1,
+      "title": "Cozy Single Room Near College",
+      "location": "Mumbai",
+      "rent": 5000,
+      "available": true,
+      "imageUrl": "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": 2,
+      "title": "Shared PG with WiFi and Meals",
+      "location": "Delhi",
+      "rent": 7000,
+      "available": false,
+      "imageUrl": "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": 3,
+      "title": "Independent Studio Apartment",
+      "location": "Bangalore",
+      "rent": 9000,
+      "available": true,
+      "imageUrl": "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": 4,
+      "title": "Furnished PG with Laundry",
+      "location": "Mumbai",
+      "rent": 6000,
+      "available": true,
+      "imageUrl": "https://images.pexels.com/photos/259950/pexels-photo-259950.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": 5,
+      "title": "Girls Only PG Near University",
+      "location": "Delhi",
+      "rent": 8000,
+      "available": false,
+      "imageUrl": "https://images.pexels.com/photos/271667/pexels-photo-271667.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": 6,
+      "title": "Affordable PG for Boys",
+      "location": "Bangalore",
+      "rent": 4500,
+      "available": true,
+      "imageUrl": "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": 7,
+      "title": "Modern PG with AC Facility",
+      "location": "Mumbai",
+      "rent": 8500,
+      "available": true,
+      "imageUrl": "https://images.pexels.com/photos/271638/pexels-photo-271638.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": 8,
+      "title": "PG with Attached Bathroom",
+      "location": "Delhi",
+      "rent": 7500,
+      "available": true,
+      "imageUrl": "https://images.pexels.com/photos/271650/pexels-photo-271650.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+        "id":9,
+        "title": "Teja PG For Gents",
+      "location": "Delhi",
+      "rent": 1,
+      "available": false,
+      "imageUrl": "https://images.pexels.com/photos/271650/pexels-photo-271650.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+        "id":10,
+        "title": "Ganesh PG For Ladies",
+      "location": "Chennai",
+      "rent": 100000000000,
+      "available": true,
+      "imageUrl": "https://images.pexels.com/photos/271650/pexels-photo-271650.jpeg?auto=compress&cs=tinysrgb&w=600"
+    }
+    
+  ]
+  
