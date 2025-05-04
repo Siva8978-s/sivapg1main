@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 export default function PropertyCard({ property }) {
   const [booked, setBooked] = useState(false);
-  
+
   const handleBook = () => {
-    // Set booked state to true to show confirmation message
     setBooked(true);
   };
-  
+
   return (
     <div style={styles.card}>
       <img src={property.imageUrl} alt={property.title} style={styles.image} />
@@ -24,24 +22,19 @@ export default function PropertyCard({ property }) {
             <span style={styles.notAvailable}>Not Available</span>
           )}
         </p>
-        
+
         {/* Single Book Now button */}
         {property.available && !booked && (
           <button onClick={handleBook} style={styles.button}>
             Book Now
           </button>
         )}
-        
-        {/* Booking confirmation message */}
+
+        {/* Confirmation with ₹500 offer */}
         {booked && (
           <div style={styles.confirmationBox}>
             <p style={styles.offer}>🎉 Booking Confirmed! You get ₹500 OFF on first rent!</p>
-            <Link 
-              to={`/book/${property.id}`}
-              style={styles.detailsButton}
-            >
-              View Booking Details
-            </Link>
+            <p style={styles.text}>Our team will contact you shortly to complete the booking.</p>
           </div>
         )}
       </div>
@@ -99,21 +92,7 @@ const styles = {
     cursor: 'pointer',
     fontWeight: '600',
   },
-  detailsButton: {
-    marginTop: 8,
-    padding: '6px 10px',
-    backgroundColor: '#38a169',
-    color: 'white',
-    border: 'none',
-    borderRadius: 6,
-    cursor: 'pointer',
-    fontWeight: '600',
-    textDecoration: 'none',
-    display: 'inline-block',
-    textAlign: 'center',
-  },
   offer: {
-    marginTop: 10,
     color: '#38a169',
     fontWeight: 'bold',
     fontSize: 14,
@@ -125,5 +104,5 @@ const styles = {
     backgroundColor: '#f0fff4',
     borderRadius: 8,
     border: '1px solid #c6f6d5',
-  }
-}
+  },
+};
