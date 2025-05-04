@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function PropertyCard({ property }) {
+  const [booked, setBooked] = useState(false);
+
+  const handleBook = () => {
+    setBooked(true);
+  };
+
   return (
     <div style={styles.card}>
       <img src={property.imageUrl} alt={property.title} style={styles.image} />
@@ -16,6 +22,16 @@ export default function PropertyCard({ property }) {
             <span style={styles.notAvailable}>Not Available</span>
           )}
         </p>
+
+        {property.available && !booked && (
+          <button onClick={handleBook} style={styles.button}>
+            Book Now
+          </button>
+        )}
+
+        {booked && (
+          <p style={styles.offer}>🎉 Booking Confirmed! You get ₹500 OFF on first rent!</p>
+        )}
       </div>
     </div>
   );
@@ -61,5 +77,20 @@ const styles = {
     color: '#e53e3e',
     fontWeight: '600',
   },
+  button: {
+    marginTop: 10,
+    padding: '8px 12px',
+    backgroundColor: '#3182ce',
+    color: 'white',
+    border: 'none',
+    borderRadius: 6,
+    cursor: 'pointer',
+    fontWeight: '600',
+  },
+  offer: {
+    marginTop: 10,
+    color: '#38a169',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
 };
-

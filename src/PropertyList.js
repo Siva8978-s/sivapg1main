@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom'; // Import Link component
 import PropertyCard from './PropertyCard';
 import Filters from './Filters';
 import Pagination from './Pagination';
@@ -59,7 +60,15 @@ export default function PropertyList({ onLogout }) {
       <Filters filters={filters} onFilterChange={handleFilterChange} />
       <div style={styles.list}>
         {currentProperties.length > 0 ? (
-          currentProperties.map(p => <PropertyCard key={p.id} property={p} />)
+          currentProperties.map(p => (
+            <div key={p.id}>
+              <PropertyCard property={p} />
+              {/* Add the Link component to navigate to the BookingPage */}
+              <Link to={`/booking/${p.id}`} style={styles.link}>
+                <button style={styles.bookNowButton}>Book Now</button>
+              </Link>
+            </div>
+          ))
         ) : (
           <p style={styles.noResults}>No properties match your filters.</p>
         )}
@@ -117,5 +126,17 @@ const styles = {
     fontStyle: 'italic',
     fontSize: 16,
   },
+  link: {
+    textDecoration: 'none',
+  },
+  bookNowButton: {
+    padding: '10px 20px',
+    backgroundColor: '#38a169',
+    color: 'white',
+    borderRadius: 8,
+    border: 'none',
+    fontSize: 18,
+    cursor: 'pointer',
+    marginTop: 10,
+  },
 };
-
