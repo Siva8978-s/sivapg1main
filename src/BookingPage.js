@@ -13,26 +13,80 @@ const BookingPage = () => {
     // Add more properties as needed
   ];
 
-  // Find the property based on URL parameter
+  // State variables
   const [selectedProperty, setSelectedProperty] = useState(null);
-  const [bookingConfirmed, setBookingConfirmed] = useState(true); // Set to true since booking is already confirmed in PropertyCard
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  // Effect to find the property based on URL parameter
   useEffect(() => {
-    // Find the property that matches the ID from the URL
-    const property = properties.find(p => p.id === id);
-    if (property) {
-      setSelectedProperty(property);
-    } else {
-      // If property not found, redirect back to property list
-      navigate('/');
+    console.log("BookingPage rendered with ID:", id);
+    
+    try {
+      // Find the property that matches the ID from the URL
+      const property = properties.find(p => p.id === id);
+      
+      if (property) {
+        console.log("Property found:", property);
+        setSelectedProperty(property);
+      } else {
+        console.log("Property not found for ID:", id);
+        setError("Property not found");
+        // Don't navigate away immediately, show the error first
+      }
+    } catch (err) {
+      console.error("Error in BookingPage:", err);
+      setError("An error occurred");
+    } finally {
+      setLoading(false);
     }
-  }, [id, navigate, properties]);
+  }, [id, properties]);
 
-  // If property is not found yet, show loading
-  if (!selectedProperty) {
-    return <div style={styles.container}>Loading property details...</div>;
+  // Handle back button click
+  const handleBackClick = () => {
+    navigate('/');
+  };
+
+  // Show loading state
+  if (loading) {
+    return (
+      <div style={styles.container}>
+        <div style={styles.loadingMessage}>Loading property details...</div>
+      </div>
+    );
   }
 
+  // Show error state
+  if (error) {
+    return (
+      <div style={styles.container}>
+        <div style={styles.errorMessage}>
+          <h3>Error</h3>
+          <p>{error}</p>
+          <button onClick={handleBackClick} style={styles.backButton}>
+            Back to Property List
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Show property not found state
+  if (!selectedProperty) {
+    return (
+      <div style={styles.container}>
+        <div style={styles.errorMessage}>
+          <h3>Property Not Found</h3>
+          <p>We couldn't find the property you're looking for.</p>
+          <button onClick={handleBackClick} style={styles.backButton}>
+            Back to Property List
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Main render - property found
   return (
     <div style={styles.container}>
       <h2 style={styles.title}>Booking Confirmation</h2>
@@ -62,7 +116,7 @@ const BookingPage = () => {
         </p>
         
         <button 
-          onClick={() => navigate('/')} 
+          onClick={handleBackClick} 
           style={styles.backButton}
         >
           Back to Property List
@@ -78,6 +132,20 @@ const styles = {
     maxWidth: 800,
     margin: '0 auto',
     fontFamily: 'Arial, sans-serif',
+  },
+  loadingMessage: {
+    textAlign: 'center',
+    padding: 40,
+    fontSize: 18,
+    color: '#4a5568',
+  },
+  errorMessage: {
+    backgroundColor: '#fff5f5',
+    padding: 30,
+    borderRadius: 12,
+    textAlign: 'center',
+    border: '1px solid #fed7d7',
+    marginTop: 40,
   },
   title: {
     fontSize: 28,
