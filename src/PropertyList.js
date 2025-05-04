@@ -1,11 +1,9 @@
-import React, { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom'; // Import Link component
+import React, { useState, useMemo, useEffect } from 'react';
 import PropertyCard from './PropertyCard';
 import Filters from './Filters';
 import Pagination from './Pagination';
-import propertiesData from './data/properties.json';  // Import JSON file
+import propertiesData from './data/properties.json';
 
-// Pagination settings
 const pageSize = 3;
 
 export default function PropertyList({ onLogout }) {
@@ -40,7 +38,7 @@ export default function PropertyList({ onLogout }) {
     currentPage * pageSize
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (currentPage > totalPages) {
       setCurrentPage(1);
     }
@@ -51,28 +49,37 @@ export default function PropertyList({ onLogout }) {
     setCurrentPage(1);
   };
 
+  const handleClearFilters = () => {
+    setFilters({
+      rent: '',
+      location: '',
+      availability: '',
+    });
+  };
+
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <h1>PG Listing Portal</h1>
+        <h1 style={styles.heading}>PG Listing Portal</h1>
         <button onClick={onLogout} style={styles.logoutButton}>Logout</button>
       </header>
+
       <Filters filters={filters} onFilterChange={handleFilterChange} />
+
+      <button onClick={handleClearFilters} style={styles.clearButton}>
+        Clear Filters
+      </button>
+
       <div style={styles.list}>
         {currentProperties.length > 0 ? (
           currentProperties.map(p => (
-            <div key={p.id}>
-              <PropertyCard property={p} />
-              {/* Add the Link component to navigate to the BookingPage */}
-              <Link to={`/booking/${p.id}`} style={styles.link}>
-                <button style={styles.bookNowButton}>Book Now</button>
-              </Link>
-            </div>
+            <PropertyCard key={p.id} property={p} />
           ))
         ) : (
           <p style={styles.noResults}>No properties match your filters.</p>
         )}
       </div>
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -86,9 +93,10 @@ const styles = {
   container: {
     maxWidth: 550,
     margin: '12px auto',
-    padding: 12,
+    padding: '12px 16px',
     fontFamily: "'Poppins', sans-serif",
-    height: 600,
+    minHeight: '80vh',
+    maxHeight: '90vh',
     overflowY: 'auto',
     background: 'linear-gradient(120deg, #f8fafc, #e0e7ff)',
     borderRadius: 16,
@@ -102,6 +110,11 @@ const styles = {
     paddingBottom: 6,
     borderBottom: '2px solid #d1d5db',
   },
+  heading: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#2d3748',
+  },
   logoutButton: {
     padding: '6px 14px',
     borderRadius: 10,
@@ -114,6 +127,17 @@ const styles = {
     boxShadow: '0 4px 12px rgba(197, 48, 48, 0.5)',
     transition: 'background-color 0.3s ease',
   },
+  clearButton: {
+    padding: '6px 12px',
+    backgroundColor: '#a0aec0',
+    color: 'white',
+    border: 'none',
+    borderRadius: 8,
+    fontWeight: '600',
+    fontSize: 14,
+    margin: '8px 0',
+    cursor: 'pointer',
+  },
   list: {
     display: 'flex',
     flexDirection: 'column',
@@ -125,18 +149,5 @@ const styles = {
     color: '#6b7280',
     fontStyle: 'italic',
     fontSize: 16,
-  },
-  link: {
-    textDecoration: 'none',
-  },
-  bookNowButton: {
-    padding: '10px 20px',
-    backgroundColor: '#38a169',
-    color: 'white',
-    borderRadius: 8,
-    border: 'none',
-    fontSize: 18,
-    cursor: 'pointer',
-    marginTop: 10,
   },
 };
